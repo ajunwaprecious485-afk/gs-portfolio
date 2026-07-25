@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gs_Dev | Web Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Gs<span>_Dev</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section id="home" class="hero">
+        <canvas id="particles"></canvas>
+        <div class="hero-content">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-name">Gs_Dev</h1>
+            <h2 class="hero-title">I build <span class="typed-text" id="typed"></span><span class="cursor">|</span></h2>
+            <p class="hero-desc">I build clean, responsive websites that help businesses grow and stand out online.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title reveal">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="reveal">I'm a passionate web developer who loves turning ideas into real, functional websites. I focus on writing clean code and creating experiences that users enjoy.</p>
+                    <p class="reveal">Whether you need a simple landing page or a full business website, I deliver quality work on time and within budget.</p>
+                    <div class="about-stats">
+                        <div class="stat reveal">
+                            <h3>10+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat reveal">
+                            <h3>100%</h3>
+                            <p>Client Satisfaction</p>
+                        </div>
+                        <div class="stat reveal">
+                            <h3>24/7</h3>
+                            <p>Availability</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-skills">
+                    <h3 class="reveal">My Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item reveal">HTML5</div>
+                        <div class="skill-item reveal">CSS3</div>
+                        <div class="skill-item reveal">JavaScript</div>
+                        <div class="skill-item reveal">Responsive Design</div>
+                        <div class="skill-item reveal">React</div>
+                        <div class="skill-item reveal">Node.js</div>
+                        <div class="skill-item reveal">Git</div>
+                        <div class="skill-item reveal">WordPress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title reveal">Services</h2>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9741;</div>
+                    <h3>Web Development</h3>
+                    <p>Custom websites built from scratch using modern technologies. Fast, secure, and scalable.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9743;</div>
+                    <h3>Responsive Design</h3>
+                    <p>Websites that look perfect on every device - desktop, tablet, and mobile.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9881;</div>
+                    <h3>Website Maintenance</h3>
+                    <p>Keep your site updated, secure, and running smoothly with ongoing support.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#10024;</div>
+                    <h3>Landing Pages</h3>
+                    <p>High-converting landing pages that turn visitors into customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title reveal">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <span class="project-number">01</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>E-Commerce Website</h3>
+                        <p>A full online store with cart, checkout, and payment integration.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <span class="project-number">02</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Restaurant Website</h3>
+                        <p>Modern restaurant site with menu display and online reservations.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>CSS</span>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <span class="project-number">03</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio Template</h3>
+                        <p>Clean portfolio template for creative professionals.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>JavaScript</span>
+                            <span>GSAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 class="reveal">Let's work together</h3>
+                    <p class="reveal">Have a project in mind? Need a website? Let's talk about it.</p>
+                    <div class="contact-details">
+                        <div class="contact-item reveal">
+                            <span>&#9993;</span>
+                            <p>your-email@example.com</p>
+                        </div>
+                        <div class="contact-item reveal">
+                            <span>&#9742;</span>
+                            <p>+234 XXX XXX XXXX</p>
+                        </div>
+                        <div class="contact-item reveal">
+                            <span>&#9873;</span>
+                            <p>Nigeria</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group reveal">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group reveal">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group reveal">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full reveal">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Gs_Dev. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
