@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="600" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6246ea"/>
+      <stop offset="100%" stop-color="#00b894"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg2)"/>
+  <!-- Dots pattern -->
+  <g opacity="0.06" fill="#fff">
+    <circle cx="30" cy="30" r="2"/><circle cx="60" cy="30" r="2"/><circle cx="90" cy="30" r="2"/>
+    <circle cx="120" cy="30" r="2"/><circle cx="150" cy="30" r="2"/><circle cx="180" cy="30" r="2"/>
+    <circle cx="210" cy="30" r="2"/><circle cx="240" cy="30" r="2"/><circle cx="270" cy="30" r="2"/>
+    <circle cx="300" cy="30" r="2"/><circle cx="330" cy="30" r="2"/><circle cx="360" cy="30" r="2"/>
+    <circle cx="390" cy="30" r="2"/><circle cx="420" cy="30" r="2"/><circle cx="450" cy="30" r="2"/>
+    <circle cx="480" cy="30" r="2"/><circle cx="510" cy="30" r="2"/><circle cx="540" cy="30" r="2"/>
+    <circle cx="570" cy="30" r="2"/>
+    <circle cx="30" cy="60" r="2"/><circle cx="60" cy="60" r="2"/><circle cx="90" cy="60" r="2"/>
+    <circle cx="120" cy="60" r="2"/><circle cx="150" cy="60" r="2"/><circle cx="180" cy="60" r="2"/>
+    <circle cx="30" cy="90" r="2"/><circle cx="60" cy="90" r="2"/><circle cx="90" cy="90" r="2"/>
+    <circle cx="120" cy="90" r="2"/><circle cx="150" cy="90" r="2"/><circle cx="180" cy="90" r="2"/>
+  </g>
+  <!-- Invoice document -->
+  <g transform="translate(160, 40)">
+    <rect x="0" y="0" width="280" height="220" rx="12" fill="#fff" opacity="0.95"/>
+    <!-- Header bar -->
+    <rect x="0" y="0" width="280" height="8" rx="12" fill="#6246ea"/>
+    <rect x="0" y="4" width="280" height="4" fill="#6246ea"/>
+    <!-- Invoice title -->
+    <text x="24" y="42" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#1a1a2e">INVOICE</text>
+    <text x="200" y="42" font-family="Inter,sans-serif" font-size="12" fill="#6b6b80">#1042</text>
+    <text x="200" y="58" font-family="Inter,sans-serif" font-size="11" fill="#00b894" font-weight="600">PAID</text>
+    <!-- Divider -->
+    <line x1="24" y1="70" x2="256" y2="70" stroke="#eee" stroke-width="1"/>
+    <!-- Line items -->
+    <text x="24" y="92" font-family="Inter,sans-serif" font-size="11" fill="#6b6b80">Web Design</text>
+    <text x="220" y="92" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">$1,200</text>
+    <text x="24" y="112" font-family="Inter,sans-serif" font-size="11" fill="#6b6b80">Logo Design</text>
+    <text x="220" y="112" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">$450</text>
+    <text x="24" y="132" font-family="Inter,sans-serif" font-size="11" fill="#6b6b80">SEO Setup</text>
+    <text x="220" y="132" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">$300</text>
+    <!-- Total -->
+    <line x1="24" y1="148" x2="256" y2="148" stroke="#eee" stroke-width="1"/>
+    <text x="24" y="172" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1a1a2e">Total</text>
+    <text x="200" y="172" font-family="Inter,sans-serif" font-size="16" font-weight="800" fill="#6246ea">$1,950</text>
+    <!-- Pay button -->
+    <rect x="24" y="188" width="232" height="20" rx="6" fill="#6246ea" opacity="0.1"/>
+    <text x="105" y="202" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#6246ea">Payment Received</text>
+  </g>
+  <!-- Floating dollar signs -->
+  <text x="80" y="120" font-family="Inter,sans-serif" font-size="40" fill="#fff" opacity="0.1" font-weight="800">$</text>
+  <text x="480" y="100" font-family="Inter,sans-serif" font-size="30" fill="#fff" opacity="0.08" font-weight="800">$</text>
+  <text x="500" y="300" font-family="Inter,sans-serif" font-size="50" fill="#fff" opacity="0.06" font-weight="800">$</text>
+  <!-- Chart bars -->
+  <g transform="translate(80, 260)">
+    <rect x="0" y="30" width="35" height="40" rx="4" fill="#fff" opacity="0.15"/>
+    <rect x="50" y="15" width="35" height="55" rx="4" fill="#fff" opacity="0.2"/>
+    <rect x="100" y="0" width="35" height="70" rx="4" fill="#fff" opacity="0.3"/>
+    <rect x="150" y="10" width="35" height="60" rx="4" fill="#fff" opacity="0.2"/>
+    <rect x="200" y="5" width="35" height="65" rx="4" fill="#fff" opacity="0.25"/>
+  </g>
+  <!-- Checkmark badge -->
+  <g transform="translate(470, 60)">
+    <circle cx="0" cy="0" r="24" fill="#fff" opacity="0.9"/>
+    <path d="M-10 0 L-3 7 L12 -8" stroke="#00b894" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Notification dot -->
+  <g transform="translate(520, 180)">
+    <circle cx="0" cy="0" r="20" fill="#fff" opacity="0.12"/>
+    <text x="-6" y="5" font-family="Inter,sans-serif" font-size="16" fill="#fff" opacity="0.8">&#9993;</text>
+  </g>
+</svg>
