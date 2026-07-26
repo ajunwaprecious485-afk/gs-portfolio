@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ember & Oak - Fine Dining</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Ember <span>&</span> Oak</a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#specials">Specials</a></li>
+            <li><a href="#reserve">Reservations</a></li>
+        </ul>
+        <a href="#reserve" class="btn btn-nav">Book a Table</a>
+        <button class="nav-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-tag">Fine Dining Experience</p>
+            <h1>Where flavor meets <span class="script">craftsmanship</span></h1>
+            <p class="hero-desc">Seasonal ingredients, bold flavors, and an atmosphere that makes every meal unforgettable.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">Explore Menu</a>
+                <a href="#reserve" class="btn btn-outline">Reserve a Table</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="plate">
+                <div class="plate-inner">
+                    <div class="plate-circle"></div>
+                    <div class="plate-food"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-bar">
+        <div class="info-item">
+            <span class="info-icon">&#128337;</span>
+            <div>
+                <strong>Open Daily</strong>
+                <p>11:00 AM - 11:00 PM</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <span class="info-icon">&#128205;</span>
+            <div>
+                <strong>Location</strong>
+                <p>123 Victoria Island, Lagos</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <span class="info-icon">&#9742;</span>
+            <div>
+                <strong>Reservations</strong>
+                <p>+234 800 123 4567</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu">
+        <div class="container">
+            <p class="section-tag">Our Menu</p>
+            <h2 class="section-title">Crafted with passion</h2>
+            <div class="menu-categories">
+                <button class="menu-tab active" data-cat="starters">Starters</button>
+                <button class="menu-tab" data-cat="mains">Mains</button>
+                <button class="menu-tab" data-cat="desserts">Desserts</button>
+                <button class="menu-tab" data-cat="drinks">Drinks</button>
+            </div>
+            <div class="menu-grid" id="menuGrid">
+                <div class="menu-item" data-cat="starters">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">01</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Truffle Mushroom Soup</h3>
+                            <span class="price">₦4,500</span>
+                        </div>
+                        <p>Wild mushroom bisque with truffle oil and crispy sourdough croutons</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-cat="starters">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #00b894, #00cec9);">02</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Grilled Prawns</h3>
+                            <span class="price">₦6,800</span>
+                        </div>
+                        <p>Tiger prawns with chili-lime butter and micro greens</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-cat="mains">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">03</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Wagyu Ribeye</h3>
+                            <span class="price">₦18,500</span>
+                        </div>
+                        <p>300g wagyu steak with roasted vegetables and peppercorn sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-cat="mains">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #e17055, #d63031);">04</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Grilled Salmon</h3>
+                            <span class="price">₦12,000</span>
+                        </div>
+                        <p>Atlantic salmon with lemon butter, asparagus, and saffron rice</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-cat="desserts">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #fd79a8, #e84393);">05</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Chocolate Lava Cake</h3>
+                            <span class="price">₦3,800</span>
+                        </div>
+                        <p>Warm dark chocolate cake with vanilla ice cream and berry coulis</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-cat="drinks">
+                    <div class="menu-item-img" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">06</div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>Signature Mojito</h3>
+                            <span class="price">₦3,200</span>
+                        </div>
+                        <p>Fresh mint, lime, rum, and a hint of tropical passion fruit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container about-grid">
+            <div class="about-visual">
+                <div class="about-img" style="background: linear-gradient(135deg, #2d3436, #636e72);"></div>
+            </div>
+            <div class="about-text">
+                <p class="section-tag">Our Story</p>
+                <h2>A dining experience like no other</h2>
+                <p>Founded in 2020, Ember & Oak was born from a love of bold flavors and honest cooking. We source the freshest local ingredients and combine them with international techniques to create dishes that surprise and delight.</p>
+                <p>Every plate tells a story. Every visit feels like coming home.</p>
+                <div class="about-stats">
+                    <div class="stat"><h3>6+</h3><p>Years Open</p></div>
+                    <div class="stat"><h3>15k+</h3><p>Happy Guests</p></div>
+                    <div class="stat"><h3>4.9</h3><p>Google Rating</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specials" class="specials">
+        <div class="container">
+            <p class="section-tag">Today's Special</p>
+            <h2 class="section-title">Chef's recommendation</h2>
+            <div class="special-card">
+                <div class="special-img" style="background: linear-gradient(135deg, #6c5ce7, #fd79a8);"></div>
+                <div class="special-info">
+                    <h3>Wagyu Tasting Menu</h3>
+                    <p>A five-course journey through the finest cuts of wagyu beef, paired with select wines from our cellar. Available this weekend only.</p>
+                    <div class="special-price">
+                        <span class="old-price">₦35,000</span>
+                        <span class="new-price">₦28,000</span>
+                    </div>
+                    <a href="#reserve" class="btn btn-primary">Reserve Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reserve" class="reserve">
+        <div class="container">
+            <p class="section-tag">Reservations</p>
+            <h2 class="section-title">Book your table</h2>
+            <div class="reserve-grid">
+                <div class="reserve-info">
+                    <h3>Visit Us</h3>
+                    <p>123 Adeola Odeku Street<br>Victoria Island, Lagos, Nigeria</p>
+                    <div class="reserve-details">
+                        <p><strong>Hours:</strong> Mon - Sun, 11AM - 11PM</p>
+                        <p><strong>Phone:</strong> +234 800 123 4567</p>
+                        <p><strong>Email:</strong> reservations@emberandoak.com</p>
+                    </div>
+                </div>
+                <form class="reserve-form" id="reserveForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Guests</option>
+                                <option>1 Person</option>
+                                <option>2 People</option>
+                                <option>3 People</option>
+                                <option>4 People</option>
+                                <option>5+ People</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="3" placeholder="Special requests (optional)"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Confirm Reservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">Ember <span>&</span> Oak</a>
+                <p>Fine dining experience in the heart of Lagos. Where every meal is a memory.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#specials">Specials</a>
+                <a href="#reserve">Reservations</a>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Ember & Oak. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
