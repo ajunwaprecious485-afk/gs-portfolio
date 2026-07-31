@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceNG — Create Invoices & Receipts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Invoice<span>NG</span></a>
+        <div class="nav-right">
+            <button class="btn btn-outline btn-sm" id="settingsBtn">Settings</button>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <button class="sidebar-link active" data-view="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                Dashboard
+            </button>
+            <button class="sidebar-link" data-view="invoices">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Invoices
+            </button>
+            <button class="sidebar-link" data-view="clients">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Clients
+            </button>
+            <button class="sidebar-link" data-view="create">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                New Invoice
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <!-- DASHBOARD VIEW -->
+            <div class="view active" id="view-dashboard">
+                <h1>Dashboard</h1>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <p class="stat-label">Total Invoices</p>
+                        <h3 id="totalInvoices">0</h3>
+                    </div>
+                    <div class="stat-card stat-paid">
+                        <p class="stat-label">Paid</p>
+                        <h3 id="paidInvoices">0</h3>
+                    </div>
+                    <div class="stat-card stat-pending">
+                        <p class="stat-label">Pending</p>
+                        <h3 id="pendingInvoices">0</h3>
+                    </div>
+                    <div class="stat-card stat-revenue">
+                        <p class="stat-label">Total Revenue</p>
+                        <h3 id="totalRevenue">₦0</h3>
+                    </div>
+                </div>
+                <div class="recent-section">
+                    <div class="section-header">
+                        <h2>Recent Invoices</h2>
+                        <button class="btn btn-primary btn-sm" onclick="switchView('create')">+ New Invoice</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="data-table" id="recentTable">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Client</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentBody"></tbody>
+                        </table>
+                        <p class="empty-state" id="dashEmpty">No invoices yet. Create your first one!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVOICES VIEW -->
+            <div class="view" id="view-invoices">
+                <div class="section-header">
+                    <h1>All Invoices</h1>
+                    <button class="btn btn-primary btn-sm" onclick="switchView('create')">+ New Invoice</button>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table" id="invoicesTable">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Client</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesBody"></tbody>
+                    </table>
+                    <p class="empty-state" id="invoicesEmpty">No invoices yet.</p>
+                </div>
+            </div>
+
+            <!-- CLIENTS VIEW -->
+            <div class="view" id="view-clients">
+                <div class="section-header">
+                    <h1>Clients</h1>
+                    <button class="btn btn-primary btn-sm" id="addClientBtn">+ Add Client</button>
+                </div>
+                <div class="clients-grid" id="clientsGrid"></div>
+                <p class="empty-state" id="clientsEmpty">No clients yet. Add your first client!</p>
+            </div>
+
+            <!-- CREATE INVOICE VIEW -->
+            <div class="view" id="view-create">
+                <h1 id="createTitle">New Invoice</h1>
+                <div class="invoice-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Invoice Number</label>
+                            <input type="text" id="invNumber" placeholder="INV-001" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="invDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            <input type="date" id="invDue" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Client</label>
+                            <select id="invClient">
+                                <option value="">Select a client</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="invStatus">
+                                <option value="pending">Pending</option>
+                                <option value="paid">Paid</option>
+                                <option value="overdue">Overdue</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h3 class="items-title">Line Items</h3>
+                    <div class="items-header">
+                        <span>Description</span>
+                        <span>Qty</span>
+                        <span>Rate (₦)</span>
+                        <span>Amount</span>
+                        <span></span>
+                    </div>
+                    <div id="lineItems"></div>
+                    <button class="btn btn-outline btn-sm" id="addItemBtn" style="margin-top:12px;">+ Add Item</button>
+
+                    <div class="invoice-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">₦0</span>
+                        </div>
+                        <div class="total-row">
+                            <label>Tax (%)</label>
+                            <input type="number" id="taxRate" value="0" min="0" max="100" style="width:60px;">
+                        </div>
+                        <div class="total-row">
+                            <span>Tax</span>
+                            <span id="taxAmount">₦0</span>
+                        </div>
+                        <div class="total-row total-final">
+                            <span>Total</span>
+                            <span id="totalAmount">₦0</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:20px;">
+                        <label>Notes</label>
+                        <textarea id="invNotes" rows="3" placeholder="Payment terms, thank you note, etc."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-outline" onclick="switchView('invoices')">Cancel</button>
+                        <button class="btn btn-primary" id="saveInvoiceBtn">Save Invoice</button>
+                        <button class="btn btn-accent" id="downloadPdfBtn" style="display:none;">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CLIENT MODAL -->
+    <div class="modal-overlay" id="clientModal">
+        <div class="modal">
+            <h2>Add Client</h2>
+            <div class="form-group">
+                <label>Client Name</label>
+                <input type="text" id="clientName" placeholder="e.g. John's Restaurant">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="clientEmail" placeholder="client@email.com">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="clientPhone" placeholder="+234 ...">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <textarea id="clientAddress" rows="2" placeholder="Business address"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="cancelClientBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveClientBtn">Save Client</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <h2>Business Settings</h2>
+            <p class="modal-desc">These appear on your invoices.</p>
+            <div class="form-group">
+                <label>Business Name</label>
+                <input type="text" id="bizName" placeholder="e.g. GS Studio">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="bizEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="bizPhone" placeholder="+234 ...">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <textarea id="bizAddress" rows="2" placeholder="Your business address"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="cancelSettingsBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INVOICE PREVIEW MODAL -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal modal-lg">
+            <div class="preview-actions">
+                <button class="btn btn-outline btn-sm" id="closePreviewBtn">Close</button>
+                <button class="btn btn-primary btn-sm" id="previewDownloadBtn">Download PDF</button>
+            </div>
+            <div id="invoicePreview"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="app.js"></script>
+
+    <div class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <button class="mobile-nav-btn active" data-view="dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                Home
+            </button>
+            <button class="mobile-nav-btn" data-view="invoices">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Invoices
+            </button>
+            <button class="mobile-nav-btn" data-view="create">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                New
+            </button>
+            <button class="mobile-nav-btn" data-view="clients">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Clients
+            </button>
+        </div>
+    </div>
+</body>
+</html>
