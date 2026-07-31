@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GS Studio is a freelance web development company building fast, responsive websites that help businesses grow online.">
+    <title>GS Studio | Web Development Company</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+                <a href="#home" class="logo">GS<span> Studio</span></a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-nav">Start a Project</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section id="home" class="hero">
+        <canvas id="particles"></canvas>
+        <div class="hero-content">
+            <p class="hero-badge reveal">Freelance Web Development Studio</p>
+            <h1 class="hero-title reveal">We build websites that <span class="gradient-text">grow your business</span></h1>
+            <p class="hero-desc reveal">GS Studio designs and develops fast, modern, conversion-focused websites for businesses, startups, and restaurants. Clean code. Clear communication. On-time delivery.</p>
+            <div class="hero-buttons reveal">
+                <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                <a href="#work" class="btn btn-outline">See Our Work</a>
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat reveal">
+            <h3><span class="counter" data-target="30">0</span>+</h3>
+            <p>Projects Delivered</p>
+        </div>
+        <div class="stat reveal">
+            <h3><span class="counter" data-target="20">0</span>+</h3>
+            <p>Happy Clients</p>
+        </div>
+        <div class="stat reveal">
+            <h3><span class="counter" data-target="3">0</span>+</h3>
+            <p>Years Experience</p>
+        </div>
+        <div class="stat reveal">
+            <h3><span class="counter" data-target="100">0</span>%</h3>
+            <p>Client Satisfaction</p>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <p class="section-tag reveal">What We Do</p>
+            <h2 class="section-title reveal">Services built for results</h2>
+            <p class="section-sub reveal">From your first landing page to a full business platform — we handle it end-to-end.</p>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M2 7h20"/></svg>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom websites and web apps built from scratch with clean, scalable code. Fast, secure, and built to last.</p>
+                    <ul class="service-list">
+                        <li>Business & corporate sites</li>
+                        <li>Custom web applications</li>
+                        <li>API & database integration</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Pixel-perfect layouts that look flawless on every device — desktop, tablet, and mobile.</p>
+                    <ul class="service-list">
+                        <li>Mobile-first approach</li>
+                        <li>Cross-browser compatibility</li>
+                        <li>Accessibility & speed</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>E-Commerce Stores</h3>
+                    <p>Complete online stores with product catalogs, carts, and secure checkout that convert browsers into buyers.</p>
+                    <ul class="service-list">
+                        <li>Product & cart systems</li>
+                        <li>Secure payment integration</li>
+                        <li>Order management</li>
+                    </ul>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4L13 11M4 14h6v6M4 20l7-7"/></svg>
+                    </div>
+                    <h3>Landing Pages</h3>
+                    <p>High-converting landing pages designed to turn visitors into customers — fast to build, easy to update.</p>
+                    <ul class="service-list">
+                        <li>Campaign & product pages</li>
+                        <li>Lead capture forms</li>
+                        <li>A/B test ready</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="work">
+        <div class="container">
+            <p class="section-tag reveal">Our Work</p>
+            <h2 class="section-title reveal">Projects we're proud of</h2>
+            <p class="section-sub reveal">Real projects, real businesses — from clean landing pages to full e-commerce platforms.</p>
+            <div class="work-grid">
+                <article class="work-card reveal">
+                    <div class="work-image" style="background-image:url('https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=420&fit=crop')"></div>
+                    <div class="work-info">
+                        <div class="work-category">Web App</div>
+                        <h3>GlobalLogix — Courier System</h3>
+                        <p>International package shipping platform with real-time tracking, delivery management, and automated email notifications.</p>
+                        <div class="work-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>MySQL</span></div>
+                        <a href="http://courier-system.great-site.net" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Live Demo &rarr;</a>
+                    </div>
+                </article>
+                <article class="work-card reveal">
+                    <div class="work-image" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=420&fit=crop')"></div>
+                    <div class="work-info">
+                        <div class="work-category">SaaS Landing Page</div>
+                        <h3>InvoiceFlow — Freelancer Invoicing</h3>
+                        <p>Modern SaaS landing page with pricing tiers, testimonials, and scroll animations for a freelancer invoicing tool.</p>
+                        <div class="work-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <a href="../saas-landing/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Live Demo &rarr;</a>
+                    </div>
+                </article>
+                <article class="work-card reveal">
+                    <div class="work-image" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=420&fit=crop')"></div>
+                    <div class="work-info">
+                        <div class="work-category">Restaurant Website</div>
+                        <h3>Ember &amp; Oak — Fine Dining</h3>
+                        <p>Elegant restaurant site with an interactive menu, reservation form, and premium design that matches the brand.</p>
+                        <div class="work-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+                        <a href="../restaurant-site/index.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Live Demo &rarr;</a>
+                    </div>
+                </article>
+                <article class="work-card reveal">
+                    <div class="work-image" style="background-image:url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=600&h=420&fit=crop')"></div>
+                    <div class="work-info">
+                        <div class="work-category">E-Commerce Store</div>
+                        <h3>CartCraft — Full Online Store</h3>
+                        <p>Complete e-commerce platform with product catalog, shopping cart, secure checkout, and an admin dashboard.</p>
+                        <div class="work-tags"><span>Node.js</span><span>Express</span><span>MongoDB</span><span>EJS</span></div>
+                        <a href="http://localhost:3000" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Live Demo &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="process">
+        <div class="container">
+            <p class="section-tag reveal">How We Work</p>
+            <h2 class="section-title reveal">A simple, transparent process</h2>
+            <p class="section-sub reveal">No surprises, no confusion. You always know what's happening and when.</p>
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <span class="step-number">01</span>
+                    <h3>Discovery Call</h3>
+                    <p>We talk about your goals, audience, and budget. You get a clear quote and timeline — free, no strings attached.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="step-number">02</span>
+                    <h3>Design</h3>
+                    <p>We create a tailored design and share it for your feedback. We refine until it feels exactly right.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="step-number">03</span>
+                    <h3>Build &amp; Test</h3>
+                    <p>We build your site with clean, maintainable code, then test it on every device and browser.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="step-number">04</span>
+                    <h3>Launch &amp; Support</h3>
+                    <p>We launch your site and stay around — updates, fixes, and improvements whenever you need them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <p class="section-tag reveal">Pricing</p>
+            <h2 class="section-title reveal">Plans that fit your budget</h2>
+            <p class="section-sub reveal">Transparent pricing. Every project is scoped before we start, so you never pay more than quoted.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Landing Page</h3>
+                    <div class="price"><span>$</span>150<span class="per">/project</span></div>
+                    <ul class="pricing-list">
+                        <li>1-page responsive site</li>
+                        <li>Contact form & CTA</li>
+                        <li>Mobile-first design</li>
+                        <li>Delivery in 3–5 days</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline btn-full">Get Started</a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <div class="popular">Most Popular</div>
+                    <h3>Business Website</h3>
+                    <div class="price"><span>$</span>350<span class="per">/project</span></div>
+                    <ul class="pricing-list">
+                        <li>Up to 5 pages</li>
+                        <li>Custom design</li>
+                        <li>Contact form & map</li>
+                        <li>SEO basics included</li>
+                        <li>Delivery in 1–2 weeks</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-full">Get Started</a>
+                </div>
+                <div class="pricing-card reveal">
+                    <h3>E-Commerce Store</h3>
+                    <div class="price"><span>$</span>650<span class="per">/project</span></div>
+                    <ul class="pricing-list">
+                        <li>Product catalog & cart</li>
+                        <li>Secure checkout</li>
+                        <li>Admin dashboard</li>
+                        <li>Payment integration</li>
+                        <li>Delivery in 2–4 weeks</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline btn-full">Get Started</a>
+                </div>
+            </div>
+            <p class="pricing-note reveal">Need something custom? <a href="#contact">Tell us about it</a> — we'll tailor a quote.</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <p class="section-tag reveal">Testimonials</p>
+            <h2 class="section-title reveal">What our clients say</h2>
+            <div class="testimonial-slider reveal">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">"GS Studio delivered our restaurant website faster than promised and it looks incredible. Reservations have gone up since we launched."</p>
+                    <p class="testimonial-author">— Restaurant Owner, Ember &amp; Oak</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"Professional, responsive, and easy to work with. The landing page they built for us converts visitors into sign-ups beautifully."</p>
+                    <p class="testimonial-author">— Founder, InvoiceFlow</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"They took our courier service online with real-time tracking. Communication was clear at every step. Highly recommended."</p>
+                    <p class="testimonial-author">— Operations Manager, GlobalLogix</p>
+                </div>
+                <button class="testimonial-arrow prev" aria-label="Previous testimonial">&#10094;</button>
+                <button class="testimonial-arrow next" aria-label="Next testimonial">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <p class="section-tag reveal">Contact</p>
+            <h2 class="section-title reveal">Let's build something great</h2>
+            <p class="section-sub reveal">Tell us about your project and we'll get back to you within 24 hours with a free quote.</p>
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <span class="contact-icon">&#9993;</span>
+                        <div><h4>Email</h4><p>ajunwaprecious485@gmail.com</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#9742;</span>
+                        <div><h4>Phone / WhatsApp</h4><p>+234 816 938 1462</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#9873;</span>
+                        <div><h4>Location</h4><p>Nigeria — working worldwide</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">&#128336;</span>
+                        <div><h4>Response Time</h4><p>Within 24 hours</p></div>
+                    </div>
+                </div>
+                <form class="contact-form reveal" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="budget" placeholder="Estimated Budget (optional)">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+        <a href="#home" class="logo">GS<span> Studio</span></a>
+                <p>Freelance web development company building fast, modern websites for growing businesses.</p>
+                <div class="social-links">
+                    <a href="https://github.com/ajunwaprecious485-afk" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.16c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.35.78 1.05.78 2.12v3.14c0 .3.2.67.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/ajunwa-precious" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                    <a href="https://x.com/precious31321526" target="_blank" rel="noopener" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></a>
+                    <a href="https://www.facebook.com/share/1bNMdDCvKX/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GS Studio. All rights reserved.</p>
+                <p>Made with <span class="heart">&hearts;</span> in Nigeria</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
