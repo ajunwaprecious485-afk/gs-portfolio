@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaStore — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Wa<span>Store</span></a>
+        <div class="nav-right">
+            <a href="#" class="store-link" id="viewStoreBtn" target="_blank" style="display:none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                View Store
+            </a>
+            <button class="btn btn-primary btn-sm" id="shareBtn">Share Store</button>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <button class="sidebar-link active" data-view="store">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                My Store
+            </button>
+            <button class="sidebar-link" data-view="products">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
+                Products
+            </button>
+            <button class="sidebar-link" data-view="analytics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+                Analytics
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <!-- STORE SETTINGS -->
+            <div class="view active" id="view-store">
+                <h1>My Store</h1>
+                <div class="settings-grid">
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Store Name</label>
+                            <input type="text" id="storeName" placeholder="e.g. Sarah's Treats">
+                        </div>
+                        <div class="form-group">
+                            <label>Store Description</label>
+                            <textarea id="storeDesc" rows="2" placeholder="What do you sell?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number</label>
+                            <input type="tel" id="storePhone" placeholder="e.g. 2348012345678">
+                            <p class="field-hint">Include country code. Customers will message this number.</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Store Slug (your link)</label>
+                            <div class="slug-input">
+                                <span class="slug-prefix">wastore.app/</span>
+                                <input type="text" id="storeSlug" placeholder="my-store">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Accent Color</label>
+                            <div class="color-options">
+                                <button class="color-btn active" data-color="#25D366" style="background:#25D366;"></button>
+                                <button class="color-btn" data-color="#2563EB" style="background:#2563EB;"></button>
+                                <button class="color-btn" data-color="#DC2626" style="background:#DC2626;"></button>
+                                <button class="color-btn" data-color="#7C3AED" style="background:#7C3AED;"></button>
+                                <button class="color-btn" data-color="#EA580C" style="background:#EA580C;"></button>
+                                <button class="color-btn" data-color="#0D9488" style="background:#0D9488;"></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="saveStoreBtn">Save Settings</button>
+                    </div>
+                    <div class="settings-preview">
+                        <h3>Preview</h3>
+                        <div class="preview-card" id="storePreview">
+                            <div class="preview-header">
+                                <div class="preview-logo" id="previewLogo">ST</div>
+                                <div>
+                                    <h4 id="previewName">Your Store</h4>
+                                    <p id="previewDesc">Your store description</p>
+                                </div>
+                            </div>
+                            <div class="preview-products" id="previewProducts">
+                                <p class="preview-empty">Add products to see them here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCTS -->
+            <div class="view" id="view-products">
+                <div class="section-header">
+                    <h1>Products</h1>
+                    <button class="btn btn-primary btn-sm" id="addProductBtn">+ Add Product</button>
+                </div>
+                <div class="products-grid" id="productsGrid"></div>
+                <p class="empty-state" id="productsEmpty">No products yet. Add your first product!</p>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div class="view" id="view-analytics">
+                <h1>Analytics</h1>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <p class="stat-label">Store Views</p>
+                        <h3 id="storeViews">0</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Products</p>
+                        <h3 id="productCount">0</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">WhatsApp Clicks</p>
+                        <h3 id="whatsappClicks">0</h3>
+                    </div>
+                </div>
+                <div class="analytics-info">
+                    <p>Analytics track how many people view your store and click the WhatsApp order button. Share your store link to start getting views.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <h2 id="productModalTitle">Add Product</h2>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="prodName" placeholder="e.g. Chocolate Cake">
+            </div>
+            <div class="form-group">
+                <label>Price (₦)</label>
+                <input type="number" id="prodPrice" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="prodDesc" rows="2" placeholder="Brief product description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="url" id="prodImage" placeholder="https://example.com/image.jpg">
+                <p class="field-hint">Paste a link to your product image (from your phone gallery, Google Drive, etc.)</p>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" id="prodCategory" placeholder="e.g. Cakes, Drinks, Accessories">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="cancelProductBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveProductBtn">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHARE MODAL -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal">
+            <h2>Share Your Store</h2>
+            <p class="modal-desc">Copy this link and share it on WhatsApp, Instagram, Facebook, or anywhere.</p>
+            <div class="share-link-box">
+                <input type="text" id="shareLink" readonly>
+                <button class="btn btn-primary btn-sm" id="copyLinkBtn">Copy</button>
+            </div>
+            <div class="share-buttons">
+                <a href="#" class="share-btn wa-share" id="shareWhatsApp" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="#fff" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.613.613l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.82-6.293-2.192l-.44-.357-2.893.97.97-2.893-.357-.44A9.965 9.965 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Share on WhatsApp
+                </a>
+                <button class="share-btn" id="copyLinkBtn2">Copy Link</button>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="closeShareBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
