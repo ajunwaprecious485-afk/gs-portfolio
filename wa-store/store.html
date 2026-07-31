@@ -262,38 +262,71 @@
         <p class="powered-by">Powered by <a href="index.html">WaStore</a></p>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore-compat.js"></script>
     <script>
-        const store = JSON.parse(localStorage.getItem('wastore') || '{}');
-        const products = JSON.parse(localStorage.getItem('waproducts') || '[]');
-        const analytics = JSON.parse(localStorage.getItem('waanalytics') || '{"views":0,"clicks":0}');
+        firebase.initializeApp({
+            apiKey: "AIzaSyDGOzluN88WfMvXAXisbfEXbTWpy0gU84Y",
+            authDomain: "wastore-8f92d.firebaseapp.com",
+            projectId: "wastore-8f92d",
+            storageBucket: "wastore-8f92d.firebasestorage.app",
+            messagingSenderId: "392763090656",
+            appId: "1:392763090656:web:0697206174ba1e769e9285"
+        });
+        const db = firebase.firestore();
 
-        if (!store.name) {
-            document.getElementById('emptyStore').style.display = 'block';
-            document.getElementById('storeFooter').style.display = 'none';
-        } else {
-            document.title = `${store.name} — WaStore`;
+        const params = new URLSearchParams(window.location.search);
+        const storeSlug = params.get('store');
 
-            const initials = store.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-            document.getElementById('storeLogo').textContent = initials;
-            document.getElementById('storeLogo').style.background = store.color || '#25D366';
-            document.getElementById('storeName').textContent = store.name;
-            document.getElementById('storeDesc').textContent = store.description || '';
+        let storeData = {};
+        let allProducts = [];
 
-            if (store.phone) {
-                document.getElementById('storeFooter').style.display = 'block';
-                document.getElementById('waOrderBtn').href = `https://wa.me/${store.phone}?text=${encodeURIComponent('Hi! I\'m interested in your products.')}`;
-                document.getElementById('waOrderBtn').addEventListener('click', () => {
-                    analytics.clicks++;
-                    localStorage.setItem('waanalytics', JSON.stringify(analytics));
-                });
+        async function loadStore() {
+            if (!storeSlug) {
+                document.getElementById('emptyStore').style.display = 'block';
+                return;
             }
 
-            renderProducts(products);
-            renderCategories();
+            try {
+                const snapshot = await db.collection('stores').where('slug', '==', storeSlug).limit(1).get();
+                if (snapshot.empty) {
+                    document.getElementById('emptyStore').style.display = 'block';
+                    return;
+                }
+
+                const doc = snapshot.docs[0];
+                storeData = doc.data();
+                document.title = `${storeData.name} — WaStore`;
+
+                const initials = storeData.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+                document.getElementById('storeLogo').textContent = initials;
+                document.getElementById('storeLogo').style.background = storeData.color || '#25D366';
+                document.getElementById('storeName').textContent = storeData.name;
+                document.getElementById('storeDesc').textContent = storeData.description || '';
+
+                if (storeData.phone) {
+                    document.getElementById('storeFooter').style.display = 'block';
+                    document.getElementById('waOrderBtn').href = `https://wa.me/${storeData.phone}?text=${encodeURIComponent('Hi! I\'m interested in your products.')}`;
+                }
+
+                const prodSnap = await db.collection('stores').doc(doc.id).collection('products').orderBy('createdAt', 'desc').get();
+                prodSnap.forEach(p => {
+                    allProducts.push({ id: p.id, ...p.data() });
+                });
+
+                renderProducts(allProducts);
+                renderCategories();
+
+            } catch (e) {
+                console.error('Error loading store:', e);
+                document.getElementById('emptyStore').style.display = 'block';
+            }
         }
 
+        loadStore();
+
         function renderCategories() {
-            const cats = [...new Set(products.map(p => p.category).filter(Boolean))];
+            const cats = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
             const tabs = document.getElementById('categoryTabs');
             if (cats.length === 0) return;
 
@@ -305,7 +338,7 @@
                     tabs.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
                     const cat = tab.dataset.cat;
-                    const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
+                    const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
                     renderProducts(filtered);
                 });
             });
@@ -335,14 +368,14 @@
         }
 
         function orderProduct(name, price) {
-            const phone = store.phone;
+            const phone = storeData.phone;
             const msg = `Hi! I'd like to order:\n\n*${name}*\nPrice: ₦${Number(price).toLocaleString()}\n\nPlease confirm availability.`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const q = e.target.value.toLowerCase();
-            const filtered = products.filter(p =>
+            const filtered = allProducts.filter(p =>
                 p.name.toLowerCase().includes(q) ||
                 (p.desc && p.desc.toLowerCase().includes(q)) ||
                 (p.category && p.category.toLowerCase().includes(q))
