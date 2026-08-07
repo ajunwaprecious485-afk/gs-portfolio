@@ -1,0 +1,118 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title"><%= typeof title !== 'undefined' ? title : 'All Products' %></h1>
+    <p class="page-header__desc"><%= typeof description !== 'undefined' ? description : 'Discover our full collection of premium products' %></p>
+  </div>
+</div>
+
+<section class="products-page">
+  <div class="container">
+    <div class="products-page__layout">
+      <aside class="products-page__sidebar">
+        <div class="filter-group">
+          <h3>Categories</h3>
+          <a href="/products" class="<%= !currentCategory ? 'active' : '' %>">All Categories</a>
+          <a href="/products?category=electronics" class="<%= currentCategory === 'electronics' ? 'active' : '' %>">Electronics</a>
+          <a href="/products?category=clothing" class="<%= currentCategory === 'clothing' ? 'active' : '' %>">Clothing</a>
+          <a href="/products?category=home" class="<%= currentCategory === 'home' ? 'active' : '' %>">Home & Living</a>
+          <a href="/products?category=sports" class="<%= currentCategory === 'sports' ? 'active' : '' %>">Sports</a>
+        </div>
+        <div class="filter-group">
+          <h3>Sort By</h3>
+          <a href="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=newest" class="<%= currentSort === 'newest' ? 'active' : '' %>">Newest</a>
+          <a href="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=price-asc" class="<%= currentSort === 'price-asc' ? 'active' : '' %>">Price: Low to High</a>
+          <a href="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=price-desc" class="<%= currentSort === 'price-desc' ? 'active' : '' %>">Price: High to Low</a>
+          <a href="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=rating" class="<%= currentSort === 'rating' ? 'active' : '' %>">Top Rated</a>
+        </div>
+      </aside>
+
+      <div>
+        <div class="products-page__header">
+          <span class="products-page__count"><%= typeof total !== 'undefined' ? total : products.length %> products</span>
+          <div class="products-page__sort">
+            <select onchange="window.location.href=this.value">
+              <option value="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=newest" <%= currentSort === 'newest' ? 'selected' : '' %>>Newest</option>
+              <option value="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=price-asc" <%= currentSort === 'price-asc' ? 'selected' : '' %>>Price: Low to High</option>
+              <option value="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=price-desc" <%= currentSort === 'price-desc' ? 'selected' : '' %>>Price: High to Low</option>
+              <option value="/products?<%= currentCategory ? 'category=' + currentCategory + '&' : '' %>sort=rating" <%= currentSort === 'rating' ? 'selected' : '' %>>Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <% if (typeof searchTerm !== 'undefined' && searchTerm) { %>
+          <div class="alert alert-info">
+            Showing results for "<strong><%= searchTerm %></strong>"
+            <a href="/products" style="margin-left: auto; color: var(--color-primary);">Clear</a>
+          </div>
+        <% } %>
+
+        <% if (products.length === 0) { %>
+          <div class="cart-empty">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <h2>No products found</h2>
+            <p>Try adjusting your search or filter criteria</p>
+            <a href="/products" class="btn btn-primary">View All Products</a>
+          </div>
+        <% } else { %>
+          <div class="products__grid">
+            <% products.forEach(function(product) { %>
+              <div class="product-card">
+                <div class="product-card__image-wrapper">
+                  <img src="<%= product.image %>" alt="<%= product.name %>" class="product-card__image">
+                  <div class="product-badge">
+                    <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                      <span class="badge badge-sale">-<%= Math.round((1 - product.price / product.comparePrice) * 100) %>%</span>
+                    <% } %>
+                    <% if (product.stock > 0 && product.stock < 5) { %>
+                      <span class="badge badge-low-stock">Low Stock</span>
+                    <% } %>
+                  </div>
+                  <form action="/cart/add" method="POST" class="js-add-to-cart product-card__quick-add">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <button type="submit" class="btn btn-primary btn-sm product-card__quick-add-btn">Add to Cart</button>
+                  </form>
+                </div>
+                <div class="product-card__info">
+                  <span class="product-card__category"><%= product.category %></span>
+                  <h3 class="product-card__name">
+                    <a href="/products/<%= product.slug || product._id %>"><%= product.name %></a>
+                  </h3>
+                  <div class="product-card__rating">
+                    <% for (var i = 1; i <= 5; i++) { %>
+                      <svg class="product-card__star<%= i <= Math.round(product.rating) ? '' : ' product-card__star--empty' %>" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <% } %>
+                    <span class="product-card__rating-count">(<%= product.numReviews || 0 %>)</span>
+                  </div>
+                  <div class="product-card__price">
+                    <span class="product-card__current-price">$<%= product.price.toFixed(2) %></span>
+                    <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                      <span class="product-card__compare-price">$<%= product.comparePrice.toFixed(2) %></span>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+
+          <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+            <div class="pagination">
+              <% if (currentPage > 1) { %>
+                <a href="/products?page=<%= currentPage - 1 %><%= currentCategory ? '&category=' + currentCategory : '' %><%= currentSort ? '&sort=' + currentSort : '' %>">Prev</a>
+              <% } %>
+              <% for (var p = 1; p <= totalPages; p++) { %>
+                <a href="/products?page=<%= p %><%= currentCategory ? '&category=' + currentCategory : '' %><%= currentSort ? '&sort=' + currentSort : '' %>" class="<%= p === currentPage ? 'active' : '' %>"><%= p %></a>
+              <% } %>
+              <% if (currentPage < totalPages) { %>
+                <a href="/products?page=<%= currentPage + 1 %><%= currentCategory ? '&category=' + currentCategory : '' %><%= currentSort ? '&sort=' + currentSort : '' %>">Next</a>
+              <% } %>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

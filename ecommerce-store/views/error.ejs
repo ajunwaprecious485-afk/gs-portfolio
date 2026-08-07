@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<!-- ======================== ERROR PAGE ======================== -->
+<section style="min-height: calc(100vh - var(--navbar-height) - var(--announcement-height) - 400px); display: flex; align-items: center; justify-content: center; padding: var(--space-20) var(--space-6);">
+  <div style="text-align: center; max-width: 480px;">
+    <!-- Large Error Number -->
+    <div style="position: relative; margin-bottom: var(--space-6);">
+      <span style="font-size: 10rem; font-weight: var(--font-black); color: var(--color-gray-100); line-height: 1; letter-spacing: -0.05em; user-select: none;">
+        <%= typeof statusCode !== 'undefined' ? statusCode : '404' %>
+      </span>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 64px; height: 64px; background: var(--color-primary-50); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;">
+          <% if (typeof statusCode !== 'undefined' && statusCode === 500) { %>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <% } else { %>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <h2 style="font-size: var(--text-2xl); font-weight: var(--font-bold); color: var(--color-dark); margin-bottom: var(--space-3);">
+      <%= typeof message !== 'undefined' ? message : 'Page Not Found' %>
+    </h2>
+    <p style="font-size: var(--text-base); color: var(--color-gray-500); margin-bottom: var(--space-8); max-width: 400px; margin-left: auto; margin-right: auto;">
+      <%= typeof message !== 'undefined' ? '' : 'Sorry, the page you are looking for doesn\'t exist or has been moved.' %>
+    </p>
+
+    <!-- CTA -->
+    <a href="/" class="btn btn-primary btn-lg">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Back to Home
+    </a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

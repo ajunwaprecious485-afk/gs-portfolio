@@ -1,0 +1,82 @@
+<%- include('../partials/header') %>
+
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <div style="margin-bottom: 24px;">
+      <a href="/account" style="color: var(--primary); font-size: 0.9rem; font-weight: 500;">&larr; Back to My Orders</a>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="card__header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h2 style="margin-bottom: 4px;">Order #<%= order.orderNumber || order._id.toString().slice(-8).toUpperCase() %></h2>
+          <p style="color: var(--gray-500); font-size: 0.9rem;">Placed on <%= order.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+        </div>
+        <span class="badge badge--<%= order.status %>"><%= order.status.replace('_', ' ') %></span>
+      </div>
+    </div>
+
+    <% if (order.statusHistory && order.statusHistory.length > 0) { %>
+      <div class="card" style="margin-bottom: 24px;">
+        <h3 style="margin-bottom: 16px;">Order Tracking</h3>
+        <div class="tracking-timeline">
+          <% order.statusHistory.reverse().forEach((h, i) => { %>
+            <div class="tracking-step <%= i === 0 ? 'is-active' : '' %>">
+              <div class="tracking-step__dot"></div>
+              <div class="tracking-step__content">
+                <p class="tracking-step__status"><%= h.status.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) %></p>
+                <p class="tracking-step__date"><%= h.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) %></p>
+                <% if (h.note) { %><p class="tracking-step__note"><%= h.note %></p><% } %>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 16px;">Items Ordered</h3>
+      <% order.items.forEach(item => { %>
+        <div style="display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-100);">
+          <img src="<%= item.image %>" alt="<%= item.name %>" style="width: 64px; height: 64px; border-radius: var(--radius); object-fit: cover;">
+          <div style="flex: 1;">
+            <p style="font-weight: 600;"><%= item.name %></p>
+            <% if (item.variant) { %><p style="font-size: 0.85rem; color: var(--gray-500);"><%= item.variant %></p><% } %>
+            <p style="font-size: 0.85rem; color: var(--gray-500);">Qty: <%= item.quantity %></p>
+          </div>
+          <p style="font-weight: 700;">$<%= (item.price * item.quantity).toFixed(2) %></p>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom: 16px;">Shipping Address</h3>
+      <p style="color: var(--gray-600); line-height: 1.8;">
+        <%= order.shippingAddress.fullName || '' %><br>
+        <%= order.shippingAddress.street %><br>
+        <%= order.shippingAddress.city %>, <%= order.shippingAddress.state %> <%= order.shippingAddress.zip %><br>
+        <%= order.shippingAddress.country %>
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom: 16px;">Order Summary</h3>
+      <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--gray-600);">
+        <span>Subtotal</span><span>$<%= order.subtotal.toFixed(2) %></span>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--gray-600);">
+        <span>Shipping</span><span><%= order.shippingCost === 0 ? 'Free' : '$' + order.shippingCost.toFixed(2) %></span>
+      </div>
+      <% if (order.tax > 0) { %>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; color: var(--gray-600);">
+          <span>Tax</span><span>$<%= order.tax.toFixed(2) %></span>
+        </div>
+      <% } %>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 2px solid var(--gray-200); font-size: 1.1rem; font-weight: 800;">
+        <span>Total</span><span>$<%= order.totalAmount.toFixed(2) %></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

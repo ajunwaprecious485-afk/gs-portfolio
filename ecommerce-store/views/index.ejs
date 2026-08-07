@@ -1,0 +1,367 @@
+<%- include('partials/header') %>
+
+<!-- ======================== HERO CAROUSEL ======================== -->
+<section class="hero" id="heroCarousel">
+  <div class="hero__track" id="heroTrack">
+    <div class="hero__slide active">
+      <img class="hero__img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=900&fit=crop&q=80" alt="Shop collection">
+      <div class="hero__overlay"></div>
+      <div class="hero__body">
+        <span class="hero__tag">New Season 2026</span>
+        <h1 class="hero__title">Shop the<br>Latest Trends</h1>
+        <p class="hero__text">Discover premium products at unbeatable prices.<br>Elevate your style today.</p>
+        <div class="hero__btns">
+          <a href="/products" class="btn btn-primary btn-lg">Shop Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/products?featured=true" class="btn btn-outline-light btn-lg">View Deals</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__slide">
+      <img class="hero__img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1920&h=900&fit=crop&q=80" alt="Electronics sale">
+      <div class="hero__overlay hero__overlay--warm"></div>
+      <div class="hero__body">
+        <span class="hero__tag">Up to 40% Off</span>
+        <h1 class="hero__title">Premium<br>Electronics</h1>
+        <p class="hero__text">Get the latest gadgets and accessories<br>at discounted prices.</p>
+        <div class="hero__btns">
+          <a href="/products?category=electronics" class="btn btn-white btn-lg">Shop Electronics</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__slide">
+      <img class="hero__img" src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1920&h=900&fit=crop&q=80" alt="Fashion collection">
+      <div class="hero__overlay hero__overlay--cool"></div>
+      <div class="hero__body">
+        <span class="hero__tag">Just Arrived</span>
+        <h1 class="hero__title">Style<br>Redefined</h1>
+        <p class="hero__text">Refresh your wardrobe with our latest<br>clothing and accessories.</p>
+        <div class="hero__btns">
+          <a href="/products?category=clothing" class="btn btn-white btn-lg">Explore Fashion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="hero__arrow hero__arrow--prev" id="heroPrev" aria-label="Previous">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hero__arrow hero__arrow--next" id="heroNext" aria-label="Next">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <div class="hero__dots" id="heroDots">
+    <button class="hero__dot active" data-slide="0"></button>
+    <button class="hero__dot" data-slide="1"></button>
+    <button class="hero__dot" data-slide="2"></button>
+  </div>
+</section>
+
+<script>
+(function(){
+  var track=document.getElementById('heroTrack');
+  var slides=track.querySelectorAll('.hero__slide');
+  var dots=document.querySelectorAll('.hero__dot');
+  var prev=document.getElementById('heroPrev');
+  var next=document.getElementById('heroNext');
+  var current=0;var total=slides.length;var timer;
+
+  function goTo(i){
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current=((i%total)+total)%total;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function startTimer(){clearInterval(timer);timer=setInterval(function(){goTo(current+1);},5000);}
+  function resetTimer(){startTimer();}
+
+  prev.addEventListener('click',function(){goTo(current-1);resetTimer();});
+  next.addEventListener('click',function(){goTo(current+1);resetTimer();});
+  dots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(this.dataset.slide));resetTimer();});});
+
+  var touchStartX=0;
+  track.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){
+    var diff=touchStartX-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>50){diff>0?goTo(current+1):goTo(current-1);resetTimer();}
+  },{passive:true});
+
+  startTimer();
+})();
+</script>
+
+<!-- ======================== FEATURES BAR ======================== -->
+<section class="features-bar">
+  <div class="container">
+    <div class="features-bar__grid">
+      <div class="features-bar__card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><strong>Free Shipping</strong><p>On orders over $50</p></div>
+      </div>
+      <div class="features-bar__card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><strong>Secure Payment</strong><p>100% protected checkout</p></div>
+      </div>
+      <div class="features-bar__card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        <div><strong>Easy Returns</strong><p>30-day return policy</p></div>
+      </div>
+      <div class="features-bar__card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div><strong>24/7 Support</strong><p>Dedicated help center</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CATEGORIES ======================== -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag">Categories</span>
+      <h2 class="section-header__title">Shop by Category</h2>
+      <p class="section-header__desc">Find exactly what you're looking for</p>
+    </div>
+    <div class="products__grid">
+      <a href="/products?category=electronics" class="category-card">
+        <img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400&h=400&fit=crop" alt="Electronics" class="category-card__image">
+        <div class="category-card__overlay">
+          <h3 class="category-card__name">Electronics</h3>
+          <span class="category-card__count">View All</span>
+        </div>
+      </a>
+      <a href="/products?category=clothing" class="category-card">
+        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=400&fit=crop" alt="Clothing" class="category-card__image">
+        <div class="category-card__overlay">
+          <h3 class="category-card__name">Clothing</h3>
+          <span class="category-card__count">View All</span>
+        </div>
+      </a>
+      <a href="/products?category=home" class="category-card">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop" alt="Home" class="category-card__image">
+        <div class="category-card__overlay">
+          <h3 class="category-card__name">Home & Living</h3>
+          <span class="category-card__count">View All</span>
+        </div>
+      </a>
+      <a href="/products?category=sports" class="category-card">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop" alt="Sports" class="category-card__image">
+        <div class="category-card__overlay">
+          <h3 class="category-card__name">Sports</h3>
+          <span class="category-card__count">View All</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FEATURED PRODUCTS ======================== -->
+<% if (typeof featured !== 'undefined' && featured.length > 0) { %>
+<section class="products-section" style="background-color: var(--color-gray-50);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag">Featured</span>
+      <h2 class="section-header__title">Trending Now</h2>
+      <p class="section-header__desc">Handpicked products our customers love</p>
+    </div>
+    <div class="products__grid">
+      <% featured.slice(0, 4).forEach(function(product) { %>
+        <div class="product-card">
+          <div class="product-card__image-wrapper">
+            <img src="<%= product.image %>" alt="<%= product.name %>" class="product-card__image">
+            <div class="product-badge">
+              <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                <span class="badge badge-sale">-<%= Math.round((1 - product.price / product.comparePrice) * 100) %>%</span>
+              <% } %>
+              <% if (product.stock > 0 && product.stock < 5) { %>
+                <span class="badge badge-low-stock">Low Stock</span>
+              <% } %>
+            </div>
+            <form action="/cart/add" method="POST" class="js-add-to-cart product-card__quick-add">
+              <input type="hidden" name="productId" value="<%= product._id %>">
+              <button type="submit" class="btn btn-primary btn-sm product-card__quick-add-btn">Add to Cart</button>
+            </form>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category"><%= product.category %></span>
+            <h3 class="product-card__name">
+              <a href="/products/<%= product.slug || product._id %>"><%= product.name %></a>
+            </h3>
+            <div class="product-card__rating">
+              <% for (var i = 1; i <= 5; i++) { %>
+                <svg class="product-card__star<%= i <= Math.round(product.rating) ? '' : ' product-card__star--empty' %>" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <% } %>
+              <span class="product-card__rating-count">(<%= product.numReviews || 0 %>)</span>
+            </div>
+            <div class="product-card__price">
+              <span class="product-card__current-price">$<%= product.price.toFixed(2) %></span>
+              <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                <span class="product-card__compare-price">$<%= product.comparePrice.toFixed(2) %></span>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    <div style="text-align: center; margin-top: var(--space-8);">
+      <a href="/products" class="btn btn-outline btn-lg">View All Products</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ======================== PROMO BANNERS ======================== -->
+<section class="products-section">
+  <div class="container">
+    <div class="promo-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+      <div style="position: relative; border-radius: var(--radius-2xl); overflow: hidden; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%); color: var(--color-white); padding: var(--space-10); min-height: 320px; display: flex; flex-direction: column; justify-content: center;">
+        <span class="badge badge-white" style="align-self: flex-start; margin-bottom: var(--space-4);">40% Off</span>
+        <h3 style="font-size: var(--text-3xl); font-weight: var(--font-bold); color: var(--color-white); margin-bottom: var(--space-3);">Electronics Sale</h3>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: var(--space-6); max-width: 320px;">Premium gadgets and accessories at discounted prices.</p>
+        <a href="/products?category=electronics" class="btn btn-white" style="align-self: flex-start;">Shop Electronics</a>
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop" alt="Electronics" style="position: absolute; right: var(--space-6); bottom: var(--space-6); width: 200px; height: 200px; object-fit: cover; border-radius: var(--radius-xl); opacity: 0.9;">
+      </div>
+      <div style="position: relative; border-radius: var(--radius-2xl); overflow: hidden; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: var(--color-white); padding: var(--space-10); min-height: 320px; display: flex; flex-direction: column; justify-content: center;">
+        <span class="badge badge-white" style="align-self: flex-start; margin-bottom: var(--space-4);">New Arrivals</span>
+        <h3 style="font-size: var(--text-3xl); font-weight: var(--font-bold); color: var(--color-white); margin-bottom: var(--space-3);">Fashion Collection</h3>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: var(--space-6); max-width: 320px;">Refresh your wardrobe with our latest clothing and accessories.</p>
+        <a href="/products?category=clothing" class="btn btn-white" style="align-self: flex-start;">Explore Fashion</a>
+        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&h=500&fit=crop" alt="Fashion" style="position: absolute; right: var(--space-6); bottom: var(--space-6); width: 200px; height: 200px; object-fit: cover; border-radius: var(--radius-xl); opacity: 0.9;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== LATEST PRODUCTS ======================== -->
+<% if (typeof latest !== 'undefined' && latest.length > 0) { %>
+<section class="products-section" style="background-color: var(--color-gray-50);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag">Just Arrived</span>
+      <h2 class="section-header__title">Latest Products</h2>
+      <p class="section-header__desc">Be the first to shop our newest arrivals</p>
+    </div>
+    <div class="products__grid">
+      <% latest.slice(0, 4).forEach(function(product) { %>
+        <div class="product-card">
+          <div class="product-card__image-wrapper">
+            <img src="<%= product.image %>" alt="<%= product.name %>" class="product-card__image">
+            <div class="product-badge">
+              <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                <span class="badge badge-sale">Sale</span>
+              <% } %>
+              <% if (product.stock > 0 && product.stock < 5) { %>
+                <span class="badge badge-low-stock">Low Stock</span>
+              <% } %>
+            </div>
+            <form action="/cart/add" method="POST" class="js-add-to-cart product-card__quick-add">
+              <input type="hidden" name="productId" value="<%= product._id %>">
+              <button type="submit" class="btn btn-primary btn-sm product-card__quick-add-btn">Add to Cart</button>
+            </form>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category"><%= product.category %></span>
+            <h3 class="product-card__name">
+              <a href="/products/<%= product.slug || product._id %>"><%= product.name %></a>
+            </h3>
+            <div class="product-card__rating">
+              <% for (var i = 1; i <= 5; i++) { %>
+                <svg class="product-card__star<%= i <= Math.round(product.rating) ? '' : ' product-card__star--empty' %>" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <% } %>
+              <span class="product-card__rating-count">(<%= product.numReviews || 0 %>)</span>
+            </div>
+            <div class="product-card__price">
+              <span class="product-card__current-price">$<%= product.price.toFixed(2) %></span>
+              <% if (product.comparePrice && product.comparePrice > product.price) { %>
+                <span class="product-card__compare-price">$<%= product.comparePrice.toFixed(2) %></span>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ======================== STATS ======================== -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-section__grid">
+      <div class="stats-section__item">
+        <span class="stats-section__number">10K+</span>
+        <span class="stats-section__label">Happy Customers</span>
+      </div>
+      <div class="stats-section__item">
+        <span class="stats-section__number">500+</span>
+        <span class="stats-section__label">Premium Products</span>
+      </div>
+      <div class="stats-section__item">
+        <span class="stats-section__number">50+</span>
+        <span class="stats-section__label">Brand Partners</span>
+      </div>
+      <div class="stats-section__item">
+        <span class="stats-section__number">99%</span>
+        <span class="stats-section__label">Satisfaction Rate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TESTIMONIALS ======================== -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag">Testimonials</span>
+      <h2 class="section-header__title">What Our Customers Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <% for (var s = 0; s < 5; s++) { %><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><% } %>
+        </div>
+        <p class="testimonial-card__text">"Absolutely love the quality! The headphones I bought are amazing. Super fast shipping too."</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">SA</div>
+          <div><strong>Sarah Anderson</strong><span>Verified Buyer</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <% for (var s = 0; s < 5; s++) { %><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><% } %>
+        </div>
+        <p class="testimonial-card__text">"Best online shopping experience. The product exceeded my expectations. Customer service was great."</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">MJ</div>
+          <div><strong>Michael Johnson</strong><span>Verified Buyer</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">
+          <% for (var s = 0; s < 5; s++) { %><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><% } %>
+        </div>
+        <p class="testimonial-card__text">"Great prices and even better quality. The denim jacket fits perfectly. Highly recommended!"</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">EW</div>
+          <div><strong>Emma Wilson</strong><span>Verified Buyer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CTA ======================== -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="cta-section__title">Ready to Start Shopping?</h2>
+    <p class="cta-section__desc">Create an account today and get <strong>10% off</strong> your first order with code <strong>WELCOME10</strong>.</p>
+    <div class="cta-section__actions">
+      <a href="/auth/register" class="btn btn-white btn-lg">Create Account</a>
+      <a href="/products" class="btn btn-outline btn-lg" style="border-color: white; color: white;">Browse Products</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

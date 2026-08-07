@@ -292,7 +292,7 @@ function renderAll() {
 // ========== SHARE ==========
 function openShareModal() {
     const slug = store.slug || 'my-store';
-    const link = `${window.location.origin}/store.html?store=${slug}`;
+    const link = `${window.location.origin}/gs-portfolio/wa-store/store.html?store=${slug}`;
     document.getElementById('shareLink').value = link;
     document.getElementById('shareWhatsApp').href = `https://wa.me/?text=${encodeURIComponent('Check out my store: ' + link)}`;
     toggleModal('shareModal', true);
