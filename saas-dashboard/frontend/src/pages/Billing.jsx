@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { CreditCard, ExternalLink, Download, CheckCircle } from 'lucide-react';
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://laudable-charm-production.up.railway.app/api';
 
 export default function Billing() {
   const [sub, setSub] = useState(null);

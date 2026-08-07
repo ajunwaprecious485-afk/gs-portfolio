@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Activity, Users, HardDrive, TrendingUp, ArrowUpRight, ArrowDownRight, Zap } from 'lucide-react';
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://laudable-charm-production.up.railway.app/api';
 
 export default function Dashboard() {
   const { user } = useAuth();

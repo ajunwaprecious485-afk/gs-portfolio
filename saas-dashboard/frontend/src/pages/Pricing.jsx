@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { Check, Zap, Building2 } from 'lucide-react';
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://laudable-charm-production.up.railway.app/api';
 const plans = [
   { name: 'Free', desc: 'For getting started', price: { m: 0, y: 0 }, f: ['1,000 API calls/month', '5 GB storage', '1 team member', 'Basic analytics'], icon: Zap },
   { name: 'Pro', desc: 'For growing teams', price: { m: 29, y: 290 }, f: ['50,000 API calls/month', '100 GB storage', '10 team members', 'Advanced analytics', 'Priority support'], pop: true, icon: Zap },
