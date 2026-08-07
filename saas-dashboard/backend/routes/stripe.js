@@ -19,8 +19,14 @@ const getStripe = () => {
 };
 
 const PLANS = {
-  pro: { monthly: 'price_1U1RkbJH0ZulOpf4vxV5y8nK', yearly: 'price_1U1RmDJH0ZulOpf4NX0S9MzR' },
-  enterprise: { monthly: 'price_1U1RqIJH0ZulOpf4bwnjIYFF', yearly: 'price_1U1RqIJH0ZulOpf4bwnjIYFF' }
+  pro: {
+    monthly: process.env.STRIPE_PRO_MONTHLY || 'price_replace_me',
+    yearly: process.env.STRIPE_PRO_YEARLY || 'price_replace_me'
+  },
+  enterprise: {
+    monthly: process.env.STRIPE_ENTERPRISE_MONTHLY || 'price_replace_me',
+    yearly: process.env.STRIPE_ENTERPRISE_YEARLY || 'price_replace_me'
+  }
 };
 
 router.get('/status', (req, res) => {
