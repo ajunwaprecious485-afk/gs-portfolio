@@ -1,8 +1,7 @@
 import express from 'express';
-import User from '../models/User.js';
-import Subscription from '../models/Subscription.js';
+import bcrypt from 'bcryptjs';
+import { getPool, checkDB } from '../config/db.js';
 import { generateToken } from '../middleware/auth.js';
-import { checkDB } from '../config/db.js';
 
 const router = express.Router();
 
@@ -10,16 +9,25 @@ router.post('/register', async (req, res) => {
   try {
     checkDB();
     const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Please fill all fields' });
+    }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existing = await getPool().query('SELECT id FROM users WHERE email = $1', [email.toLowerCase()]);
+    if (existing.rows.length > 0) {
       return res.status(400).json({ error: 'Email already in use' });
     }
 
-    const user = await User.create({ name, email, password });
-    await Subscription.create({ user: user._id });
+    const hashed = await bcrypt.hash(password, 12);
+    const result = await getPool().query(
+      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email, avatar, role, created_at',
+      [name.trim(), email.toLowerCase(), hashed]
+    );
 
-    const token = generateToken(user._id);
+    const user = result.rows[0];
+    await getPool().query('INSERT INTO subscriptions (user_id) VALUES ($1)', [user.id]);
+
+    const token = generateToken(user.id);
     res.status(201).json({ user, token });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -31,13 +39,16 @@ router.post('/login', async (req, res) => {
     checkDB();
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
+    const result = await getPool().query('SELECT * FROM users WHERE email = $1', [email?.toLowerCase()]);
+    const user = result.rows[0];
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const token = generateToken(user._id);
-    res.json({ user, token });
+    const { password: _, ...safeUser } = user;
+    const token = generateToken(user.id);
+    res.json({ user: safeUser, token });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

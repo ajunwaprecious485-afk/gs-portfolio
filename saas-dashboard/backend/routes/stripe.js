@@ -1,9 +1,7 @@
 import express from 'express';
 import Stripe from 'stripe';
-import User from '../models/User.js';
-import Subscription from '../models/Subscription.js';
+import { getPool, checkDB } from '../config/db.js';
 import { protect } from '../middleware/auth.js';
-import { checkDB } from '../config/db.js';
 
 const router = express.Router();
 
@@ -38,36 +36,41 @@ router.post('/checkout', protect, async (req, res) => {
     checkDB();
     const s = getStripe();
     if (!s) {
-      return res.status(503).json({ error: 'Stripe is not configured. Add your Stripe API key to the backend .env file.' });
+      return res.status(503).json({ error: 'Stripe is not configured.' });
     }
 
     const { plan, interval } = req.body;
-    const user = await User.findById(req.userId);
-    const subscription = await Subscription.findOne({ user: req.userId });
+    const user = req.user;
+    const subResult = await getPool().query('SELECT * FROM subscriptions WHERE user_id = $1', [req.userId]);
+    const subscription = subResult.rows[0];
 
-    let customerId = subscription?.stripeCustomerId;
+    let customerId = subscription?.stripe_customer_id;
 
     if (!customerId) {
       const customer = await s.customers.create({
         email: user.email,
         name: user.name,
-        metadata: { userId: user._id.toString() }
+        metadata: { userId: req.userId.toString() }
       });
       customerId = customer.id;
-      subscription.stripeCustomerId = customerId;
+      await getPool().query('UPDATE subscriptions SET stripe_customer_id = $1 WHERE user_id = $2', [customerId, req.userId]);
+    }
+
+    const priceId = PLANS[plan]?.[interval];
+    if (!priceId || priceId === 'price_replace_me') {
+      return res.status(400).json({ error: 'Invalid plan or price not configured' });
     }
 
     const session = await s.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
-      line_items: [{ price: PLANS[plan][interval], quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       mode: 'subscription',
       success_url: `${process.env.CLIENT_URL}/billing?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.CLIENT_URL}/pricing`,
-      metadata: { userId: user._id.toString(), plan }
+      metadata: { userId: req.userId.toString(), plan }
     });
 
-    await subscription.save();
     res.json({ url: session.url });
   } catch (error) {
     console.error('Stripe checkout error:', error.message);
@@ -79,18 +82,15 @@ router.post('/portal', protect, async (req, res) => {
   try {
     checkDB();
     const s = getStripe();
-    if (!s) {
-      return res.status(503).json({ error: 'Stripe is not configured.' });
-    }
+    if (!s) return res.status(503).json({ error: 'Stripe is not configured.' });
 
-    const subscription = await Subscription.findOne({ user: req.userId });
+    const subResult = await getPool().query('SELECT stripe_customer_id FROM subscriptions WHERE user_id = $1', [req.userId]);
+    const customerId = subResult.rows[0]?.stripe_customer_id;
 
-    if (!subscription?.stripeCustomerId) {
-      return res.status(400).json({ error: 'No billing account found' });
-    }
+    if (!customerId) return res.status(400).json({ error: 'No billing account found' });
 
     const session = await s.billingPortal.sessions.create({
-      customer: subscription.stripeCustomerId,
+      customer: customerId,
       return_url: `${process.env.CLIENT_URL}/billing`
     });
 
@@ -115,30 +115,20 @@ router.post('/webhook', async (req, res) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const subscription = await Subscription.findOne({
-      stripeCustomerId: session.customer
-    });
-
-    if (subscription) {
-      subscription.stripeSubscriptionId = session.subscription;
-      subscription.plan = session.metadata.plan;
-      subscription.status = 'active';
-      subscription.currentPeriodEnd = new Date(session.current_period_end * 1000);
-      await subscription.save();
-    }
+    await getPool().query(
+      `UPDATE subscriptions SET stripe_subscription_id = $1, plan = $2, status = 'active', current_period_end = to_timestamp($3), updated_at = NOW()
+       WHERE stripe_customer_id = $4`,
+      [session.subscription, session.metadata.plan, session.current_period_end, session.customer]
+    );
   }
 
   if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.deleted') {
-    const stripeSubscription = event.data.object;
-    const subscription = await Subscription.findOne({
-      stripeSubscriptionId: stripeSubscription.id
-    });
-
-    if (subscription) {
-      subscription.status = stripeSubscription.status;
-      subscription.currentPeriodEnd = new Date(stripeSubscription.current_period_end * 1000);
-      await subscription.save();
-    }
+    const sub = event.data.object;
+    await getPool().query(
+      `UPDATE subscriptions SET status = $1, current_period_end = to_timestamp($2), updated_at = NOW()
+       WHERE stripe_subscription_id = $3`,
+      [sub.status, sub.current_period_end, sub.id]
+    );
   }
 
   res.json({ received: true });
