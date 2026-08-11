@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #fafafa;
+  color: #1a1a2e;
+}
+
+.tiptap-editor {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.tiptap-editor .ProseMirror {
+  min-height: 300px;
+  padding: 1rem;
+  outline: none;
+}
+
+.tiptap-editor .ProseMirror h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap-editor .ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap-editor .ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap-editor .ProseMirror p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tiptap-editor .ProseMirror li {
+  margin-bottom: 0.25rem;
+}
+
+.tiptap-editor .ProseMirror img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tiptap-editor .ProseMirror blockquote {
+  border-left: 3px solid #8b5cf6;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.tiptap-editor .ProseMirror code {
+  background: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.tiptap-editor .ProseMirror pre {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.tiptap-editor .ProseMirror pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.tiptap-editor .ProseMirror a {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.blog-content h1 { font-size: 1.875rem; font-weight: 700; margin-bottom: 0.5rem; }
+.blog-content h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+.blog-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+.blog-content p { margin-bottom: 0.75rem; line-height: 1.8; }
+.blog-content ul, .blog-content ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+.blog-content li { margin-bottom: 0.25rem; }
+.blog-content img { max-width: 100%; border-radius: 0.5rem; margin: 1rem 0; }
+.blog-content blockquote { border-left: 3px solid #8b5cf6; padding-left: 1rem; margin: 1rem 0; color: #6b7280; font-style: italic; }
+.blog-content a { color: #7c3aed; text-decoration: underline; }
