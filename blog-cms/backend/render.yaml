@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: blog-cms-api
+    runtime: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://frontend-khaki-phi-65.vercel.app

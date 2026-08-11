@@ -7,6 +7,7 @@ import { initDB } from './config/db.js';
 import authRoutes from './routes/auth.js';
 import postRoutes from './routes/posts.js';
 import uploadRoutes from './routes/upload.js';
+import seedRoutes from './routes/seed.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,6 +31,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/seed', seedRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

@@ -1,0 +1,8 @@
+mutation {
+  serviceInstanceUpdate(
+    serviceId: "5a739257-b25c-4c05-b88c-a115d6fef1e5",
+    input: {
+      preDeployCommand: "node seed.js"
+    }
+  )
+}
