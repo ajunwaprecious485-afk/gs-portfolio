@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Redesign Showcase — Before / After</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --font: 'Inter', system-ui, sans-serif;
+            --blue: #3b82f6;
+            --blue-bright: #60a5fa;
+            --blue-deep: #1d4ed8;
+            --bg-dark: #0b0f1a;
+            --panel-vs: #3b82f6;
+        }
+
+        body {
+            font-family: var(--font);
+            background:
+                radial-gradient(1200px 600px at 50% -10%, #16233f 0%, transparent 60%),
+                var(--bg-dark);
+            color: #eef2ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 1440px;
+            background: linear-gradient(180deg, #0e1424 0%, #0a0e18 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+        }
+
+        /* Studio floor reflection + isometric feel */
+        .slide::after {
+            content: "";
+            position: absolute;
+            left: 6%; right: 6%; bottom: -6px;
+            height: 40px;
+            background: linear-gradient(180deg, rgba(59,130,246,0.28), transparent);
+            filter: blur(18px);
+            z-index: 0;
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-header .brand {
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 0.3px;
+        }
+        .slide-header .brand span { color: var(--blue-bright); }
+
+        .slide-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            padding: 34px 40px 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .slide-title small {
+            display: block;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #93a4c4;
+            letter-spacing: 0.4px;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 30px 40px 46px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Center VS medallion */
+        .vs {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            width: 74px; height: 74px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #648fd6, var(--panel-vs));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px -8px rgba(59,130,246,0.9);
+            border: 4px solid #0b0f1a;
+        }
+
+        .panel {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin: 0 10px;
+        }
+        .panel + .panel { margin-left: 40px; }
+
+        .panel-label {
+            align-self: flex-start;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 3px;
+            padding: 9px 18px;
+            border-radius: 9px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .panel-label.before { background: #2b303b; color: #aab4c4; }
+        .panel-label.after  { background: var(--blue); color: #fff; box-shadow: 0 8px 22px -6px rgba(59,130,246,0.7); }
+
+        /* Browser frame */
+        .browser {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.12);
+            transform: perspective(1200px) rotateX(2deg) rotateY(-1deg);
+            box-shadow: 0 30px 60px -18px rgba(0,0,0,0.7);
+            position: relative;
+        }
+        .browser.after {
+            transform: perspective(1200px) rotateX(2deg) rotateY(1deg);
+            border-color: rgba(59,130,246,0.45);
+            box-shadow: 0 30px 70px -18px rgba(59,130,246,0.55);
+        }
+
+        .browser-bar {
+            height: 30px;
+            background: #1a2030;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 12px;
+        }
+        .browser-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .browser-bar .dot.r { background: #ff5f57; }
+        .browser-bar .dot.y { background: #febc2e; }
+        .browser-bar .dot.g { background: #28c840; }
+        .browser-bar .url {
+            flex: 1;
+            margin-left: 10px;
+            height: 16px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.07);
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: #7d8aa8;
+        }
+
+        .screen {
+            height: 460px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ---- BEFORE : outdated 2010 layout ---- */
+        .before .screen {
+            background: #f5f2ec;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        .before .nav {
+            height: 40px;
+            background: linear-gradient(#5a6070, #3d4250);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 0 14px;
+            border-bottom: 3px solid #f0a020;
+        }
+        .before .nav a {
+            font-size: 11px;
+            color: #fff;
+            background: rgba(0,0,0,0.18);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: var(--font);
+            text-decoration: none;
+        }
+        .before .nav a:hover { background: #f0a020; }
+        .before .marquee {
+            height: 26px;
+            background: #fff8d0;
+            color: #7a1f1f;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 1px solid #e6c44a;
+            font-family: var(--font);
+        }
+        .before .banner {
+            height: 150px;
+            margin: 14px;
+            background:
+                linear-gradient(90deg, #9fc3ee 0, #9fc3ee 60%, #7fa7d8 60%);
+            border: 2px solid #4870a8;
+            position: relative;
+        }
+        .before .banner::-webkit-scrollbar { display:none; }
+        .before .banner h1 {
+            position: absolute;
+            left: 18px; top: 24px;
+            color: #fff;
+            text-shadow: 2px 2px 0 #2a4a7a;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .before .banner .tag {
+            position: absolute;
+            left: 18px; top: 62px;
+            color: #2a3c5c;
+            background: #d8e6fa;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: var(--font);
+            font-size: 11px;
+            border: 1px solid #8aa7d0;
+        }
+        .before .cols { display: flex; gap: 12px; padding: 4px 14px 0; }
+        .before .col { flex: 1; }
+        .before .col h3 {
+            font-size: 13px;
+            color: #2a4a7a;
+            background: #e0e9f4;
+            padding: 5px 8px;
+            border-left: 4px solid #f0a020;
+            margin-bottom: 8px;
+            font-family: var(--font);
+        }
+        .before .box {
+            background: #fff;
+            border: 1px solid #cfc6b4;
+            height: 52px;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.08);
+        }
+        .before .gif-badge {
+            display: inline-flex;
+            background: #f0a020;
+            color: #fff;
+            font-size: 9px;
+            font-family: var(--font);
+            padding: 2px 6px;
+            margin-left: 6px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+        .before .footer {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: #3d4250;
+            color: #cfd6e0;
+            font-family: var(--font);
+            font-size: 10px;
+            text-align: center;
+            padding: 9px;
+            border-top: 3px solid #f0a020;
+            letter-spacing: 0.6px;
+        }
+
+        /* ---- AFTER : sleek modern dark UI ---- */
+        .after .screen {
+            background: #0b0f1a;
+            font-family: var(--font);
+        }
+        .after .topnav {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+        }
+        .after .logo {
+            font-weight: 700;
+            font-size: 13px;
+            color: #fff;
+            letter-spacing: 0.3px;
+        }
+        .after .logo b { color: var(--blue-bright); }
+        .after .links { display: flex; gap: 14px; }
+        .after .links a {
+            font-size: 10px;
+            color: #9fb0d0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .after .links a.cta {
+            background: var(--blue);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        .after .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 18px;
+            padding: 14px 22px 22px;
+        }
+        .after .hero h2 {
+            font-size: 26px;
+            line-height: 1.1;
+            font-weight: 800;
+            color: #fff;
+        }
+        .after .hero h2 span {
+            color: var(--blue-bright);
+            background: linear-gradient(90deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .after .hero p {
+            color: #9fb0d0;
+            font-size: 10.5px;
+            margin: 10px 0 14px;
+        }
+        .after .hero-btns { display: flex; gap: 9px; }
+        .after .btn {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 7px;
+            border: none;
+            cursor: pointer;
+        }
+        .after .btn.primary { background: var(--blue); color: #fff; }
+        .after .btn.ghost { background: transparent; color: #cfd9ee; border: 1px solid #2a3550; }
+
+        /* Chart card */
+        .after .chart-card {
+            background: linear-gradient(160deg, #141b2e, #0e1424);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 20px 40px -18px rgba(59,130,246,0.4);
+        }
+        .after .chart-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .after .chart-head .t { font-size: 12px; font-weight: 700; color: #e6ecff; }
+        .after .chart-head .v { font-size: 18px; font-weight: 800; color: var(--blue-bright); }
+
+        .after .bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 92px;
+        }
+        .after .bar {
+            flex: 1;
+            border-radius: 4px 4px 2px 2px;
+            background: linear-gradient(180deg, var(--blue-bright), var(--blue-deep));
+            animation: grow 1.2s ease forwards;
+            transform-origin: bottom;
+        }
+        .after .bar:nth-child(1){ height:42%; animation-delay:.1s; }
+        .after .bar:nth-child(2){ height:58%; animation-delay:.2s; }
+        .after .bar:nth-child(3){ height:47%; animation-delay:.3s; }
+        .after .bar:nth-child(4){ height:70%; animation-delay:.4s; }
+        .after .bar:nth-child(5){ height:62%; animation-delay:.5s; }
+        .after .bar:nth-child(6){ height:84%; animation-delay:.6s; }
+        .after .bar:nth-child(7){ height:73%; animation-delay:.7s; }
+        .after .bar:nth-child(8){ height:96%; animation-delay:.8s; }
+        .after .bar:nth-child(9){ height:80%; animation-delay:.9s; }
+
+        @keyframes grow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .after .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
+        .after .stat {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 9px;
+            padding: 8px;
+            text-align: center;
+        }
+        .after .stat b { display: block; font-size: 14px; color: #fff; }
+        .after .stat span { font-size: 8.5px; color: #8fa0c0; }
+
+        .after .foot {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 9px 18px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #7385a8;
+        }
+
+        /* Bottom trial bar */
+        .trial-bar {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 8px 40px 34px;
+            font-size: 13px;
+            color: #9fb0d0;
+        }
+        .pills { display: flex; gap: 10px; }
+        .pill {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 7px 18px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #cdd7ee;
+        }
+        .pill.hl { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+        .trial-bar .lbl {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #93a4c4;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .split { grid-template-columns: 1fr; gap: 34px; }
+            .panel + .panel { margin-left: 0; }
+            .vs { display: none; }
+            .screen { height: 380px; }
+            .after .hero { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="slide">
+        <header class="slide-header">
+            <div class="brand">Gs<span>_Studio</span> · Redesign</div>
+            <div>UI/UX Showcase · 2026</div>
+        </header>
+
+        <div class="slide-title">
+            Website Redesign: From Outdated to Outstanding
+            <small>Modern Design System · Dark Mode · Data-Driven UI</small>
+        </div>
+
+        <div class="split">
+            <div class="panel">
+                <div class="panel-label before">Before</div>
+                <div class="browser before">
+                    <div class="browser-bar">
+                        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                        <span class="url">http://oldsite.com/index.html</span>
+                    </div>
+                    <div class="screen">
+                        <div class="nav">
+                            <a>Home</a><a>About</a><a>Services</a><a>Gallery</a><a>Contact</a>
+                        </div>
+                        <div class="marquee">
+                            &#9829; WELCOME TO OUR WEBSITE &#9829; &nbsp;32,448 VISITORS ON OUR GUESTBOOK PAGE!!! &nbsp;&#9733; SIGN IT TODAY! &#9733;
+                        </div>
+                        <div class="banner">
+                            <h1>Welcome to Our<br>Company Website!</h1>
+                            <div class="tag">Flash not supported &#9785; · Click here</div>
+                            <span class="gif-badge" style="position:absolute; right:14px; top:14px;">NEW! GIF</span>
+                        </div>
+                        <div class="cols">
+                            <div class="col">
+                                <h3>News</h3>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                            </div>
+                            <div class="col">
+                                <h3>Links</h3>
+                                <div class="box"></div>
+                                <div class="box"></div>
+                            </div>
+                            <div class="col">
+                                <h3>Visit Counter</h3>
+                                <div class="box" style="font-family: monospace; display:flex; align-items:center; justify-content:center; color:#1a3a6a; font-size:18px; letter-spacing:2px; text-shadow:1px 1px 0 #d8f0ff;">007845</div>
+                            </div>
+                        </div>
+                        <div class="footer">&copy; 2004 Company Inc. · Best viewed in IE6 at 800x600 &#9632;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-label after">After</div>
+                <div class="browser after">
+                    <div class="browser-bar">
+                        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+                        <span class="url">https://company.com</span>
+                    </div>
+                    <div class="screen">
+                        <div class="topnav">
+                            <div class="logo">Co<b>.</b>Brand</div>
+                            <div class="links">
+                                <a>Product</a><a>Features</a><a>Pricing</a><a>About</a>
+                                <a class="cta">Get Started</a>
+                            </div>
+                        </div>
+                        <div class="hero">
+                            <div class="hero-copy">
+                                <h2>Grow faster with<br><span>modern, beautiful</span> design</h2>
+                                <p>Loved by 48,000+ teams. Clean, fast, and data-driven experiences your users will love.</p>
+                                <div class="hero-btns">
+                                    <button class="btn primary">Start Free Trial</button>
+                                    <button class="btn ghost">Watch Demo</button>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-head">
+                                    <span class="t">Revenue Growth</span>
+                                    <span class="v">+182%</span>
+                                </div>
+                                <div class="bars">
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                </div>
+                                <div class="stats">
+                                    <div class="stat"><b>3.2x</b><span>Conversion</span></div>
+                                    <div class="stat"><b>0.6s</b><span>Load Time</span></div>
+                                    <div class="stat"><b>99.9%</b><span>Uptime</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="foot">
+                            <span>&copy; 2026 Co.Brand · All rights reserved</span>
+                            <span>Terms · Privacy · Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vs">VS</div>
+        </div>
+
+        <div class="trial-bar">
+            <span class="lbl">Design System</span>
+            <div class="pills">
+                <span class="pill">Dark Mode</span>
+                <span class="pill hl">Vibrant Blue</span>
+                <span class="pill">Typography</span>
+                <span class="pill">Data Viz</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
