@@ -332,9 +332,6 @@ section {
     background: var(--bg-alt);
     border-block: 1px solid var(--border);
     padding: 56px 0;
-}
-
-.stats-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
