@@ -922,18 +922,15 @@ section {
     transform: translateY(0);
 }
 
-/* Fallback: if JS fails, show content after 1s */
-@media (prefers-reduced-motion: no-preference) {
-    .reveal {
-        animation: revealFallback 0.1s forwards;
-        animation-delay: 1.2s;
-        animation-play-state: paused;
-    }
-    .reveal.visible {
-        animation-play-state: running;
-    }
+/* Fallback: auto-reveal after 1.5s if JS is blocked (Brave shields) */
+.reveal {
+    animation: autoReveal 0.7s ease forwards;
+    animation-delay: 1.5s;
 }
-@keyframes revealFallback {
+.reveal.visible {
+    animation: none;
+}
+@keyframes autoReveal {
     to { opacity: 1; transform: translateY(0); }
 }
 
