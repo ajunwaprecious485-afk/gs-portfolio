@@ -35,10 +35,10 @@ const revealObserver = new IntersectionObserver((entries) => {
 });
 
 revealElements.forEach(el => revealObserver.observe(el));
-// Fallback: ensure content visible even if IntersectionObserver blocked (e.g. Brave shields)
+// Safety fallback: if observer doesn't fire within 3s (e.g. no scroll), show hero only
 setTimeout(() => {
-    revealElements.forEach(el => el.classList.add('visible'));
-}, 1200);
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+}, 1500);
 
 // Animated counters
 const counterEls = document.querySelectorAll('.counter');
